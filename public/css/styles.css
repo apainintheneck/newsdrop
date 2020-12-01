@@ -1,0 +1,15 @@
+body {
+    background-image: url(../img/rain_trees_bg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: top left;
+}
+
+input[type="checkbox"] {
+    margin-left: 20px;
+}
+
+.add-page {
+    max-width: 40rem;
+}
