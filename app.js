@@ -1,7 +1,12 @@
 const express = require("express");
-const app = express();
+const bodyParser = require("body-parser"); //Used to parse the body of post requests.
 const fetch = require("node-fetch");
 const pool = require("./dbPool.js");
+
+const app = express();
+
+app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.json());
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -16,6 +21,7 @@ app.get("/add", function(req, res){
 });
 
 app.post("/added", function(req, res){
+    console.log(req.body);
     res.render("added");
 });
 
