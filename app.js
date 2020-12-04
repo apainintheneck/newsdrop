@@ -28,13 +28,20 @@ app.post("/added", function(req, res){
     sql = "INSERT INTO posts (title, type, url, description) VALUES (?,?,?,?)";
     sqlParams = [req.body.title, req.body.type, req.body.url, req.body.description];
     
-    pool.query(sql, sqlParams, function (err, rows, fields){
-        if (err) throw err;
+    //Fix database before you continue testing adding to database.
+    // pool.query(sql, sqlParams, function (err, rows, fields){
+    //     if (err) throw err;
         
-        console.log(rows); //For testing
-    });
-
-    res.render("added");
+    //     console.log(rows); //For testing
+    // });
+    
+    //Add tags to database.
+    
+    if(1){ //If post added successfully...
+        res.render("add-success");
+    } else { //If unable to add post...
+        res.render("add-error");
+    }
     
 });
 
