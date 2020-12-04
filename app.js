@@ -20,7 +20,7 @@ app.get("/add", function(req, res){
 });
 
 app.post("/added", function(req, res){
-    console.log(req.body);
+    console.log(req.body); //For testing.
     res.render("added");
 });
 
