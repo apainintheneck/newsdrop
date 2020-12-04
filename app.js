@@ -20,7 +20,7 @@ app.get("/add", function(req, res){
 });
 
 app.post("/added", function(req, res){
-    console.log(req.body); //For testing.
+    console.log(req.body); //For testing
     
     let sql;
     let sqlParams;
@@ -30,7 +30,8 @@ app.post("/added", function(req, res){
     
     pool.query(sql, sqlParams, function (err, rows, fields){
         if (err) throw err;
-        console.log(rows); 
+        
+        console.log(rows); //For testing
     });
 
     res.render("added");
