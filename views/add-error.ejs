@@ -10,7 +10,11 @@
             <div class="card-header"> Add Error </div>
             <div class="card-body">
                 <h4 class="card-title"> Sorry! Your post wasn't added. </h4>
-                Error information.
+                <%= msg %>
+                <div class="form-group">
+                    <br>
+                    <input type="text" class="form-control" placeholder="<%= url %>" readonly>
+                </div>
                 <hr>
                 <div class="text-center">
                     <a href="/" type="button" class="btn btn-secondary">Home</a>
