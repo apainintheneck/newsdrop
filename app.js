@@ -42,7 +42,7 @@ app.post("/added", function(req, res){
     //Add tags to database.
     
     if(1){ //If post added successfully...
-        res.render("add-success", {"siteInfo": req.body});
+        res.render("add-success", {"title": req.body.title, "url": req.body.url, "description": req.body.description});
     } else { //If unable to add post...
         res.render("add-error", {"url": req.body.url, "msg": "The following link has already been posted before."});
     }
