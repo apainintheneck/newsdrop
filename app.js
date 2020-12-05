@@ -44,7 +44,7 @@ app.post("/added", function(req, res){
     if(1){ //If post added successfully...
         res.render("add-success", {"siteInfo": req.body});
     } else { //If unable to add post...
-        res.render("add-error", {"url": req.body.url, "msg": "The follwoing link has already been posted before."});
+        res.render("add-error", {"url": req.body.url, "msg": "The following link has already been posted before."});
     }
     
 });
