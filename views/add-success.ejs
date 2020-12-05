@@ -10,7 +10,16 @@
             <div class="card-header"> Post Added </div>
             <div class="card-body">
                 <h4 class="card-title"> Congrats! Your post was added. </h4>
-                Post Information
+                <div class="card border-dark mb-3">
+                    <div class="card-header text-center">
+                        <h4>
+                            <a href="<%= url %>" class="text-secondary" target="_blank"><%= title %></a>
+                        </h4>
+                    </div>
+                    <div class="card-body text-dark">
+                        <p class="card-text"><%= description %></p>
+                    </div>
+                </div>
                 <hr>
                 <div class="text-center">
                     <a href="/" type="button" class="btn btn-secondary">Home</a>
