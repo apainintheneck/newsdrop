@@ -28,19 +28,23 @@ app.post("/added", function(req, res){
     sql = "INSERT INTO posts (title, type, url, description) VALUES (?,?,?,?)";
     sqlParams = [req.body.title, req.body.type, req.body.url, req.body.description];
     
-    //Fix database before you continue testing adding to database.
+    // Fix database before you continue testing adding to database.
     // pool.query(sql, sqlParams, function (err, rows, fields){
-    //     if (err) throw err;
+    //     if (err){
+    //         throw err;
+    //         res.render("add-error", {"url": req.body.url, "msg": "Error: Unable to contact database."});
+    //     } 
         
     //     console.log(rows); //For testing
+    //     console.log(fields);
     // });
     
     //Add tags to database.
     
     if(1){ //If post added successfully...
-        res.render("add-success");
+        res.render("add-success", {"siteInfo": req.body});
     } else { //If unable to add post...
-        res.render("add-error");
+        res.render("add-error", {"url": req.body.url, "msg": "The follwoing link has already been posted before."});
     }
     
 });
