@@ -48,10 +48,13 @@ app.post("/added", async function(req, res){
             let insertID = res.insertID;
             
             //Add tags to database.
+            if(tags) addTags(insertID, tags);
             
             res.render("add-success", {"title": req.body.title, "type": req.body.type, "url": req.body.url, "description": req.body.description, "tags": tags});
         }
     });
+    
+    res.render("add-success", {"title": req.body.title, "type": req.body.type, "url": req.body.url, "description": req.body.description, "tags": tags});
         
 });
 
