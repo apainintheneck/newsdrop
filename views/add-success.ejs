@@ -12,12 +12,19 @@
                 <h4 class="card-title"> Congrats! Your post was added. </h4>
                 <div class="card border-dark mb-3">
                     <div class="card-header text-center">
-                        <h4>
-                            <a href="<%= url %>" class="text-secondary" target="_blank"><%= title %></a>
-                        </h4>
+                        <h5>
+                            <a href="<%= url %>" class="text-dark" target="_blank"><%= title %></a>
+                        </h5>
                     </div>
                     <div class="card-body text-dark">
                         <p class="card-text"><%= description %></p>
+                    </div>
+                    <div class="card-footer text-dark">
+                        Type: <a href="#" class="badge badge-secondary"><%= type %></a>
+                        Tags: 
+                        <% for(let i = 0; tags && i < tags.length; i++){ %>
+                            <a href="#" class="badge badge-dark"><%= tags[i] %></a> 
+                        <% } %>
                     </div>
                 </div>
                 <hr>

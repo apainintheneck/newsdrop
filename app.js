@@ -19,7 +19,7 @@ app.get("/add", function(req, res){
     res.render("add");
 });
 
-app.post("/added", function(req, res){
+app.post("/added", function(req, res, body){
     console.log(req.body); //For testing
     
     let sql;
@@ -29,23 +29,28 @@ app.post("/added", function(req, res){
     sqlParams = [req.body.title, req.body.type, req.body.url, req.body.description];
     
     // Fix database before you continue testing adding to database.
-    // pool.query(sql, sqlParams, function (err, rows, fields){
-    //     if (err){
-    //         throw err;
-    //         res.render("add-error", {"url": req.body.url, "msg": "Error: Unable to contact database."});
-    //     } 
+    pool.query(sql, sqlParams, function (err){
+        if (err){
+            if(err.code == "ER_DUP_ENTRY" || err.errno == 1062){
+                res.render("add-error", {"url": req.body.url, "msg": "The following link has already been posted before."});
+            } else {
+                res.render("add-error", {"url": req.body.url, "msg": "Error: Unable to access the database."});
+            }
+            console.log(err);
+        } 
         
-    //     console.log(rows); //For testing
-    //     console.log(fields);
-    // });
+    });
+    
+    let tags;
+    if(req.body.tags){
+        tags = req.body.tags.split(" ").filter(Boolean); //Use filter() to remove empty strings "" resulting from split() method.
+        console.log("Add tags to db."); //Testing
+        console.log(tags); //Testing
+    }
     
     //Add tags to database.
     
-    if(1){ //If post added successfully...
-        res.render("add-success", {"title": req.body.title, "url": req.body.url, "description": req.body.description});
-    } else { //If unable to add post...
-        res.render("add-error", {"url": req.body.url, "msg": "The following link has already been posted before."});
-    }
+    res.render("add-success", {"title": req.body.title, "type": req.body.type, "url": req.body.url, "description": req.body.description, "tags": tags});
     
 });
 
