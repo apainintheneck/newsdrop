@@ -19,23 +19,6 @@ app.get("/add", function(req, res){
     res.render("add");
 });
 
-// app.post("/api/user-posts", function(req, res){
-//     console.log(req.body); //For testing
-    
-//     let sql;
-//     let sqlParams;
-    
-//     sql = "INSERT INTO posts (title, type, url, description) VALUES (?,?,?,?)";
-//     sqlParams = [req.body.title, req.body.type, req.body.url, req.body.description];
-    
-//     // Fix database before you continue testing adding to database.
-//     pool.query(sql, sqlParams, function (err){
-//         if (err) throw err;
-//     });
-    
-//     // // Add tags to database.
-// });
-
 app.post("/added", async function(req, res){
     console.log(req.body); //For testing
     
@@ -51,21 +34,25 @@ app.post("/added", async function(req, res){
     sql = "INSERT INTO posts (title, type, url, description) VALUES (?,?,?,?)";
     sqlParams = [req.body.title, req.body.type, req.body.url, req.body.description];
     
-    try{
-        await pool.query(sql, sqlParams, function (err, rows){
-            if(err) throw err;
-        });
-        
-        res.render("add-success", {"title": req.body.title, "type": req.body.type, "url": req.body.url, "description": req.body.description, "tags": tags});
-    } catch(e) {
-        if(e.code == "ER_DUP_ENTRY" || e.errno == 1062){
-            res.render("add-error", {"url": req.body.url, "msg": "The following link has already been posted before."});
+    await pool.query(sql, sqlParams, function (err, res){
+        if(err) {
+            if(err.code == "ER_DUP_ENTRY" || err.errno == 1062){
+                res.render("add-error", {"url": req.body.url, "msg": "The following link has already been posted before."});
+                console.log(err);
+            } else {
+                res.render("add-error", {"url": req.body.url, "msg": "Error: Unable to access database."});
+                console.log(err);
+            }
         } else {
-            res.render("add-error", {"url": req.body.url, "msg": "Error: Unable to access the database."});
+            console.log(res);
+            let insertID = res.insertID;
+            
+            //Add tags to database.
+            
+            res.render("add-success", {"title": req.body.title, "type": req.body.type, "url": req.body.url, "description": req.body.description, "tags": tags});
         }
-        console.log(e);
-    }
-
+    });
+        
 });
 
 //starting server
