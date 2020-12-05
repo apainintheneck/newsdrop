@@ -19,8 +19,31 @@ app.get("/add", function(req, res){
     res.render("add");
 });
 
-app.post("/added", function(req, res, body){
+// app.post("/api/user-posts", function(req, res){
+//     console.log(req.body); //For testing
+    
+//     let sql;
+//     let sqlParams;
+    
+//     sql = "INSERT INTO posts (title, type, url, description) VALUES (?,?,?,?)";
+//     sqlParams = [req.body.title, req.body.type, req.body.url, req.body.description];
+    
+//     // Fix database before you continue testing adding to database.
+//     pool.query(sql, sqlParams, function (err){
+//         if (err) throw err;
+//     });
+    
+//     // // Add tags to database.
+// });
+
+app.post("/added", async function(req, res){
     console.log(req.body); //For testing
+    
+    let tags;
+    if(req.body.tags){
+        tags = req.body.tags.split(" ").filter(Boolean); //Use filter() to remove empty strings "" resulting from split() method.
+        tags = [...new Set(tags)]; //Use the conversion to a set to remove duplicates.
+    }
     
     let sql;
     let sqlParams;
@@ -28,30 +51,21 @@ app.post("/added", function(req, res, body){
     sql = "INSERT INTO posts (title, type, url, description) VALUES (?,?,?,?)";
     sqlParams = [req.body.title, req.body.type, req.body.url, req.body.description];
     
-    // Fix database before you continue testing adding to database.
-    pool.query(sql, sqlParams, function (err){
-        if (err){
-            if(err.code == "ER_DUP_ENTRY" || err.errno == 1062){
-                res.render("add-error", {"url": req.body.url, "msg": "The following link has already been posted before."});
-            } else {
-                res.render("add-error", {"url": req.body.url, "msg": "Error: Unable to access the database."});
-            }
-            console.log(err);
-        } 
+    try{
+        await pool.query(sql, sqlParams, function (err, rows){
+            if(err) throw err;
+        });
         
-    });
-    
-    let tags;
-    if(req.body.tags){
-        tags = req.body.tags.split(" ").filter(Boolean); //Use filter() to remove empty strings "" resulting from split() method.
-        console.log("Add tags to db."); //Testing
-        console.log(tags); //Testing
+        res.render("add-success", {"title": req.body.title, "type": req.body.type, "url": req.body.url, "description": req.body.description, "tags": tags});
+    } catch(e) {
+        if(e.code == "ER_DUP_ENTRY" || e.errno == 1062){
+            res.render("add-error", {"url": req.body.url, "msg": "The following link has already been posted before."});
+        } else {
+            res.render("add-error", {"url": req.body.url, "msg": "Error: Unable to access the database."});
+        }
+        console.log(e);
     }
-    
-    //Add tags to database.
-    
-    res.render("add-success", {"title": req.body.title, "type": req.body.type, "url": req.body.url, "description": req.body.description, "tags": tags});
-    
+
 });
 
 //starting server
