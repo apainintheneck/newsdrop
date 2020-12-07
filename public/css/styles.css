@@ -6,10 +6,14 @@ body {
     background-position: top left;
 }
 
-input[type="checkbox"] {
+input[type="radio"] {
     margin-left: 20px;
 }
 
 .add-page {
     max-width: 40rem;
+}
+
+.post:link, .post:hover {
+    text-decoration: none;
 }
