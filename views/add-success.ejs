@@ -10,23 +10,23 @@
             <div class="card-header"> Post Added </div>
             <div class="card-body">
                 <h4 class="card-title"> Congrats! Your post was added. </h4>
-                <div class="card border-dark mb-3">
+                <a href="<%= url %>" target="_blank" class="card border-dark mb-3 post">
                     <div class="card-header text-center">
                         <h5>
-                            <a href="<%= url %>" class="text-dark" target="_blank"><%= title %></a>
+                            <span class="text-dark"><%= title %></span>
                         </h5>
                     </div>
                     <div class="card-body text-dark">
                         <p class="card-text"><%= description %></p>
                     </div>
                     <div class="card-footer text-dark">
-                        Type: <a href="#" class="badge badge-secondary"><%= type %></a>
+                        Type: <span class="badge badge-secondary"><%= type %></span>
                         Tags: 
                         <% for(let i = 0; tags && i < tags.length; i++){ %>
-                            <a href="#" class="badge badge-dark"><%= tags[i] %></a> 
+                            <span class="badge badge-dark"><%= tags[i] %></span> 
                         <% } %>
                     </div>
-                </div>
+                </a>
                 <hr>
                 <div class="text-center">
                     <a href="/" type="button" class="btn btn-secondary">Home</a>
