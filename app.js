@@ -21,7 +21,7 @@ app.get("/add", function(req, res){
 }); //"/add"
 
 //Post route to receive form data from route "/add".
-app.post("/added", function(req, res){
+app.post("/add", function(req, res){
     //Parse tag string to remove spaces and duplicates and get a tag array.
     let tags;
     if(req.body.tags){
@@ -50,7 +50,7 @@ app.post("/added", function(req, res){
         }
     });
         
-}); //"/added"
+}); //"/add"
 
 //starting server
 app.listen(process.env.PORT, process.env.IP, function(){
