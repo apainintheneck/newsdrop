@@ -1,41 +1,25 @@
 /* global $ */
- $(document).ready(function() {
-  
-  async function displayUserLinks(){
-  let response = await fetch(`/api/getUserFavorites`);
-  let data = await response.json();
-  console.log(response);
-  console.log(data);
-  
-  $("#results").html("");
-  let htmlString = "";
+$(document).ready(function() {
 
+    async function displayUserLinks() {
+        let response = await fetch(`/api/getPosts`);
+        let data = await response.json();
+        console.log(response);
+        console.log(data);
 
-  data.forEach(function(row){
-   //htmlString += "<a href=" + row.url + "target="_blank" class="card border-dark mb-3 post">";
-   htmlString += '<a href=" ' + row.url + '" target="_blank"  class="card border-dark mb-3 post">';
-   htmlString += "<u" + 'style = "display:inline">' + row.title  + " (";
-   htmlString +=  row.type + ")</u>";
-   
-   //htmlString +=  row.url + "<br>";
-   
-   htmlString += "<br>" + row.description + "<br></a>";
-   //htmlString += row.datetime + "<br><hr>";
- });
+        $("#results").html("");
+        let htmlString = "";
 
-console.log(htmlString);
+        //builds a htmlString and then displays it within #results div
+        data.forEach(function(row) {
+            htmlString += '<a href=" ' + row.url + '" target="_blank"  class="card border-dark mb-3 post">';
+            htmlString += "<u" + 'style = "display:inline">' + row.title + " (";
+            htmlString += row.type + ")</u>";
+            htmlString += "<br>" + row.description + "<br></a>";
+        });
+        console.log(htmlString);
+        $("#results").append(htmlString);
 
- $("#results").append(htmlString);
- 
-};
-displayUserLinks();
-
-/*
-
-   async function updateFavorite(action){
-        let url = `/api/getUserFavorites`
-        await fetch(url);
-    }
-    */
+    };
+    displayUserLinks();
 });
-

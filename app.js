@@ -52,20 +52,14 @@ app.post("/add", function(req, res){
         
 }); //"/add"
 
-
-app.get("/userlinks", function(req, res){
-    res.render("userlinks");
-});
-
-app.get("/api/getUserFavorites", function(req, res){
-  let sql = "SELECT * FROM posts";
-  pool.query(sql, function (err, rows, fields) {
-    
-    if (err) throw err;
-    console.log(rows);
-    res.send(rows);
-  });
-    
+//local api to pull from user posts database
+app.get("/api/getPosts", function(req, res){
+    let sql = "SELECT * FROM posts";
+    pool.query(sql, function (err, rows, fields) {
+        if (err) throw err;
+        console.log(rows);
+        res.send(rows);//sends data to display function as "row"
+    });
 });
 
 //starting server
