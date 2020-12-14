@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-  /* global $ */
+/* global $ */
  $(document).ready(function() {
   
   async function displayUserLinks(){
@@ -39,9 +38,4 @@ displayUserLinks();
     }
     */
 });
-=======
-/* global $ */
-$(document).ready(function(){
-    
-});
->>>>>>> origin/main
+
