@@ -13,3 +13,7 @@ input[type="checkbox"] {
 .add-page {
     max-width: 40rem;
 }
+
+.post:link, .post:hover {
+    text-decoration: none;
+}
