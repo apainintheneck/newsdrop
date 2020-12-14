@@ -1,3 +1,4 @@
+<<<<<<< HEAD
   /* global $ */
  $(document).ready(function() {
   
@@ -38,3 +39,9 @@ displayUserLinks();
     }
     */
 });
+=======
+/* global $ */
+$(document).ready(function(){
+    
+});
+>>>>>>> origin/main

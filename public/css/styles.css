@@ -6,7 +6,7 @@ body {
     background-position: top left;
 }
 
-input[type="checkbox"] {
+input[type="radio"] {
     margin-left: 20px;
 }
 
