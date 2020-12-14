@@ -52,6 +52,16 @@ app.post("/add", function(req, res){
         
 }); //"/add"
 
+//local api to pull from user posts database
+app.get("/api/getPosts", function(req, res){
+    let sql = "SELECT * FROM posts";
+    pool.query(sql, function (err, rows, fields) {
+        if (err) throw err;
+        // console.log(rows); //testing
+        res.send(rows);//sends data to display function as "row"
+    });
+});
+
 //starting server
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("Express server is running..."); 
