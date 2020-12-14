@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title> newsdrop </title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" 
-        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    </head>
-    <body>
+<%- include('partials/header.ejs') %>
         <nav class="navbar navbar-dark bg-primary mb-3">
     <div class="container">
       <h1><span class="navbar-brand">Welcome to Newsdrop!</span></h1>
@@ -46,6 +39,5 @@
     </div>
     <div id="results"></div>
   </div>
-    <script src="/js/functions.js"></script>
-    </body>
-</html>
+    <script src="js/functions.js"></script>
+ <%- include('partials/footer.ejs') %> 
