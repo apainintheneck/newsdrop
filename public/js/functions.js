@@ -4,8 +4,8 @@ $(document).ready(function() {
     async function displayUserLinks() {
         let response = await fetch(`/api/getPosts`);
         let data = await response.json();
-        console.log(response);
-        console.log(data);
+        // console.log(response); //testing
+        // console.log(data); //testing
 
         $("#results").html("");
         let htmlString = "";
@@ -17,7 +17,7 @@ $(document).ready(function() {
             htmlString += row.type + ")</u>";
             htmlString += "<br>" + row.description + "<br></a>";
         });
-        console.log(htmlString);
+        // console.log(htmlString); //testing
         $("#results").append(htmlString);
 
     };
