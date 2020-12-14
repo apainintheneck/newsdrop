@@ -57,7 +57,7 @@ app.get("/api/getPosts", function(req, res){
     let sql = "SELECT * FROM posts";
     pool.query(sql, function (err, rows, fields) {
         if (err) throw err;
-        console.log(rows);
+        // console.log(rows); //testing
         res.send(rows);//sends data to display function as "row"
     });
 });
