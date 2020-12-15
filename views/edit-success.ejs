@@ -4,10 +4,11 @@
         <title> newsdrop: added </title>
         <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <script src="js/addPost.js"></script>
     </head>
     <body class="add-page mx-auto">
         <div class="card bg-light mx-auto mt-5">
-            <div class="card-header"> Post Updated </div>
+            <div class="card-header"> Post Added </div>
             <div class="card-body">
                 <h4 class="card-title"> Congrats! Your post was added. </h4>
                 <a id="url" href="<%= url %>" target="_blank" class="card border-dark mb-3 post">
@@ -18,13 +19,6 @@
                     </div>
                     <div class="card-body text-dark">
                         <p class="card-text"><%= description %></p>
-                    </div>
-                    <div class="card-footer text-dark">
-                        Type: <span class="badge badge-secondary"><%= type %></span>
-                        Tags: 
-                        <% for(let i = 0; tags && i < tags.length; i++){ %>
-                            <span class="badge badge-dark"><%= tags[i] %></span> 
-                        <% } %>
                     </div>
                 </a>
                 <hr>
@@ -38,6 +32,5 @@
         </div>
         
         <%- include('partials/footer.ejs') %>
-        <script src="js/saveUrl.js"></script>
     </body>
 </html>

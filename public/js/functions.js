@@ -2,7 +2,7 @@
 $(document).ready(function() {
 
     async function displayUserLinks() {
-        let response = await fetch(`/api/getPosts`);
+        let response = await fetch(`/api/getPosts?action=all`);
         let data = await response.json();
         // console.log(response); //testing
         // console.log(data); //testing

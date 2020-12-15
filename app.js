@@ -20,6 +20,10 @@ app.get("/add", function(req, res){
     res.render("add");
 }); //"/add"
 
+app.get("/edit", function(req, res){
+    res.render("edit");
+}); //"/edit"
+
 //Post route to receive form data from route "/add".
 app.post("/add", function(req, res){
     //Parse tag string to remove spaces and duplicates and get a tag array.
@@ -52,10 +56,37 @@ app.post("/add", function(req, res){
         
 }); //"/add"
 
+//Post route to receive form data from route "/edit".
+app.post("/edit", function(req, res){
+    //Create sql string and param array.
+    let sql = "UPDATE posts SET title = ?, description = ? WHERE url = ?";
+    let sqlParams = [req.body.title, req.body.description, req.body.url];
+    
+    //Query database to insert post.
+    pool.query(sql, sqlParams, function (err, rows){
+        if(err) { //If there is a sql error, handle it immediately.
+            throw err;
+        } else { //If there are no errors, add tags to db and display successfully added page.
+            res.render("edit-success", {"title": req.body.title, "url": req.body.url, "description": req.body.description});
+        }
+    });
+    
+}); //"/edit"
+
 //local api to pull from user posts database
 app.get("/api/getPosts", function(req, res){
     let sql = "SELECT * FROM posts";
-    pool.query(sql, function (err, rows, fields) {
+    let sqlParams = [];
+    
+    switch(req.query.action){
+        case "all":     sql = sql + " ORDER BY datetime DESC LIMIT 20";
+                        break;
+        case "url":     sql = sql + " WHERE url=?";
+                        sqlParams.push(req.query.url);
+                        break;
+    }
+    
+    pool.query(sql, sqlParams, function (err, rows, fields) {
         if (err) throw err;
         // console.log(rows); //testing
         res.send(rows);//sends data to display function as "row"
