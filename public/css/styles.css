@@ -13,3 +13,16 @@ input[type="checkbox"] {
 .add-page {
     max-width: 40rem;
 }
+
+.mt-5{
+    text-align: center;
+    width: 50%;
+    margin: 25%;
+}
+
+.navbar-brand{
+    text-align: center;
+    font-size: 2rem;
+    margin-left: 35%;
+    
+}
