@@ -17,3 +17,7 @@ input[type="radio"] {
 .post:link, .post:hover {
     text-decoration: none;
 }
+
+a.visited {
+    background-color: pink;
+}
