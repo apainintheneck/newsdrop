@@ -1,11 +1,11 @@
 /* global $ */
 $(document).ready(function() {
-    sessionStorage.setItem("lastPostUrl", "");
+    $("#alert").hide();
     displayPostInfo();
 
     async function displayPostInfo() {
         let url = sessionStorage.getItem("lastPostUrl");
-        console.log(url);
+        // console.log(url);
         if(url == undefined || url == ""){
             disableForm();
             displayAlert("Sorry! You are only allowed to edit the last post you added.")
