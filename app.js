@@ -58,21 +58,19 @@ app.post("/add", function(req, res){
 
 //Post route to receive form data from route "/edit".
 app.post("/edit", function(req, res){
-    // //Create sql string and param array.
-    // let sql = "";
-    // let sqlParams = [];
+    //Create sql string and param array.
+    let sql = "UPDATE posts SET title = ?, description = ? WHERE url = ?";
+    let sqlParams = [req.body.title, req.body.description, req.body.url];
     
-    // //Query database to insert post.
-    // pool.query(sql, sqlParams, function (err, rows){
-    //     if(err) { //If there is a sql error, handle it immediately.
-    //         throw err;
-    //     } else { //If there are no errors, add tags to db and display successfully added page.
-    //         res.render("add-success", {"title": req.body.title, "url": req.body.url, "description": req.body.description});
-    //     }
-    // });
+    //Query database to insert post.
+    pool.query(sql, sqlParams, function (err, rows){
+        if(err) { //If there is a sql error, handle it immediately.
+            throw err;
+        } else { //If there are no errors, add tags to db and display successfully added page.
+            res.render("edit-success", {"title": req.body.title, "url": req.body.url, "description": req.body.description});
+        }
+    });
     
-    res.render("edit-success", {"title": req.body.title, "url": req.body.url, "description": req.body.description});
-        
 }); //"/edit"
 
 //local api to pull from user posts database
