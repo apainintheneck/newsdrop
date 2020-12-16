@@ -22,17 +22,11 @@ a.visited {
     background-color: pink;
 }    
 
-.footer{
-    text-align: center;
-    width: 50%;
-    margin: 25%;
-}
-
 .navbar-brand{
     margin-left: 10%;
     font-size: 1.4em;
 }
 
-.navbar {
-    background-color: rgba(240, 240, 240, 0.8);
+.navbar, .card{
+    background-color: rgba(240, 240, 240, 0.85);
 }
