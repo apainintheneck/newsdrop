@@ -4,7 +4,7 @@ const searchForm = document.getElementById('search-form');
 const searchBtn = document.getElementById('search-btn');
 const searchInput = document.getElementById('search-input');
 
-searchReddit("news", "10", "latest"); //Shows latest news when the page is first loaded.
+searchReddit("technology", "10", "hot"); //Shows latest news when the page is first loaded.
 
 searchForm.addEventListener('submit', e => {
   e.preventDefault();
