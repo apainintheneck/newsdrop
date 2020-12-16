@@ -6,7 +6,7 @@ body {
     background-position: top left;
 }
 
-input[type="checkbox"] {
+input[type="radio"] {
     margin-left: 20px;
 }
 
@@ -14,7 +14,15 @@ input[type="checkbox"] {
     max-width: 40rem;
 }
 
-.mt-5{
+.post:link, .post:hover {
+    text-decoration: none;
+}
+
+a.visited {
+    background-color: pink;
+}    
+
+.footer{
     text-align: center;
     width: 50%;
     margin: 25%;
