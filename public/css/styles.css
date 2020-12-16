@@ -29,8 +29,10 @@ a.visited {
 }
 
 .navbar-brand{
-    text-align: center;
-    font-size: 2rem;
-    margin-left: 35%;
-    
+    margin-left: 10%;
+    font-size: 1.4em;
+}
+
+.navbar {
+    background-color: rgba(240, 240, 240, 0.8);
 }
