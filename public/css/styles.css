@@ -6,13 +6,14 @@ body {
     background-position: top left;
 }
 
-input[type="checkbox"] {
+input[type="radio"] {
     margin-left: 20px;
 }
 
 .add-page {
     max-width: 40rem;
 }
+
 
 .mt-5{
     text-align: center;
@@ -24,5 +25,12 @@ input[type="checkbox"] {
     text-align: center;
     font-size: 2rem;
     margin-left: 35%;
-    
+}
+.post:link, .post:hover {
+    text-decoration: none;
+}
+
+a.visited {
+    background-color: pink;
+
 }

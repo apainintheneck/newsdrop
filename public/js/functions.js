@@ -1,3 +1,4 @@
+
 import reddit from './redditapi.js';
 
 const searchForm = document.getElementById('search-form');
@@ -48,33 +49,55 @@ searchForm.addEventListener('submit', e => {
   });
 
   e.preventDefault();
+=======
+/* global $ */
+$(document).ready(function() {
+
+    async function displayUserLinks() {
+        let response = await fetch(`/api/getPosts?action=all`);
+        let data = await response.json();
+        // console.log(response); //testing
+        // console.log(data); //testing
+
+        $("#results").html("");
+        let htmlString = "";
+
+        //builds a htmlString and then displays it within #results div
+        data.forEach(function(row) {
+            var visited = localStorage.getItem('visited');
+            var visitedClass = "";
+            if(visited) {
+                visited = JSON.parse(visited);
+                if($.inArray(row.id.toString(), visited) !== -1) {
+                    visitedClass = "visited";
+                }
+            }
+            htmlString += '<a href=" ' + row.url + '" target="_blank"  class="card border-dark mb-3 post '+visitedClass+'" id="'+row.id+'">';
+            htmlString += "<u" + 'style = "display:inline">' + row.title + " (";
+            htmlString += row.type + ")</u>";
+            htmlString += "<br>" + row.description + "<br></a>";
+        });
+        // console.log(htmlString); //testing
+        $("#results").append(htmlString);
+        
+
+    };
+    displayUserLinks();
+    
+    $('#results').on('click', 'a', function(){
+        $(this).addClass('visited');    
+       var visited = localStorage.getItem('visited');
+
+       if(visited) {
+            visited = JSON.parse(visited);
+            if($.inArray($(this).attr('id'), visited) === -1) {
+                visited.push($(this).attr('id'));
+                localStorage.setItem('visited', JSON.stringify(visited));
+            } 
+       } else {
+           localStorage.setItem('visited', JSON.stringify([$(this).attr("id")]));
+       }
+      
+    });
+
 });
-
-// Show Message Function
-function showMessage(message, className) {
-  // Create div
-  const div = document.createElement('div');
-  // Add classes
-  div.className = `alert ${className}`;
-  // Add text
-  div.appendChild(document.createTextNode(message));
-  // Get parent
-  const searchContainer = document.getElementById('search-container');
-  // Get form
-  const search = document.getElementById('search');
-
-  // Insert alert
-  searchContainer.insertBefore(div, search);
-
-  // Timeout after 3 sec
-  setTimeout(function() {
-    document.querySelector('.alert').remove();
-  }, 6000);
-}
-
-// Truncate String Function
-function truncateString(myString, limit) {
-  const shortened = myString.indexOf(' ', limit);
-  if (shortened == -1) return myString;
-  return myString.substring(0, shortened);
-}
