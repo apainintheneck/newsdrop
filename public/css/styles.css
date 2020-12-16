@@ -20,4 +20,17 @@ input[type="radio"] {
 
 a.visited {
     background-color: pink;
+}    
+
+.footer{
+    text-align: center;
+    width: 50%;
+    margin: 25%;
+}
+
+.navbar-brand{
+    text-align: center;
+    font-size: 2rem;
+    margin-left: 35%;
+    
 }
