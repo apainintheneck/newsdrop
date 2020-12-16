@@ -20,6 +20,10 @@ app.get("/add", function(req, res){
     res.render("add");
 }); //"/add"
 
+app.get("/reddit", function(req, res){
+    res.render("reddit");
+});//"/"
+
 //Post route to receive form data from route "/add".
 app.post("/add", function(req, res){
     //Parse tag string to remove spaces and duplicates and get a tag array.

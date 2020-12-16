@@ -1,10 +1,12 @@
-import reddit from './redditapi.js';
+import reddit from './reddit-api.js';
 
 const searchForm = document.getElementById('search-form');
 const searchBtn = document.getElementById('search-btn');
 const searchInput = document.getElementById('search-input');
 
 searchForm.addEventListener('submit', e => {
+  e.preventDefault();
+  
   // Get sort
   const sortBy = document.querySelector('input[name="sortby"]:checked').value;
   // Get limit
@@ -47,7 +49,7 @@ searchForm.addEventListener('submit', e => {
     document.getElementById('results').innerHTML = output;
   });
 
-  e.preventDefault();
+  // e.preventDefault();
 });
 
 // Show Message Function
