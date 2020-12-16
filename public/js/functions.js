@@ -21,9 +21,14 @@ $(document).ready(function() {
                 }
             }
             htmlString += '<a href=" ' + row.url + '" target="_blank"  class="card border-dark mb-3 post '+visitedClass+'" id="'+row.id+'">';
-            htmlString += "<u" + 'style = "display:inline">' + row.title + " (";
-            htmlString += row.type + ")</u>";
-            htmlString += "<br>" + row.description + "<br></a>";
+            htmlString += '<div class="card-header text-center">';
+            // htmlString += "<u" + 'style = "display:inline">' + row.title + " (";
+            // htmlString += row.type + ")</u>";
+            htmlString += '<span class="text-dark">' + row.title +'</span>';
+            htmlString += '</div>';
+            htmlString += '<div class="card-body text-dark">' + row.description + "</div>";
+            htmlString += '<div class="card-footer text-dark">' + 'Type: ' + '<span class="badge badge-secondary">' + row.type +'</span>' + "</div>";
+            htmlString += "</a>";
         });
         // console.log(htmlString); //testing
         $("#results").append(htmlString);
