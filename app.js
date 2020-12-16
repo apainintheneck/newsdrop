@@ -1,7 +1,7 @@
 const express = require("express");
 const fetch = require("node-fetch");
 const pool = require("./dbPool.js");
-var url = require('url');
+const url = require('url');
 
 const app = express();
 
@@ -47,9 +47,10 @@ app.post("/add", function(req, res){
         } else { //If there are no errors, add tags to db and display successfully added page.
             if(tags){
                 addTags(rows.insertId, tags);
-                //function call to get baseUrl and add to baseUrls table
-                addBase(req.body.url);
             }
+            //function call to get baseUrl and add to baseUrls table
+            addBase(req.body.url);
+            
             res.render("add-success", {"title": req.body.title, "type": req.body.type, "url": req.body.url, "description": req.body.description, "tags": tags});
         }
     });
@@ -96,7 +97,7 @@ function addBase(initialUrl){
     //parses the url into easily accessible portions
     var q = url.parse(adr, true);
     //strips off all but the base Url
-    baseUrl = q.host
+    let baseUrl = q.host
 
     //load the baseUrl into a parameter array
     let sqlParams = [];
