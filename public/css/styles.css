@@ -18,15 +18,20 @@ input[type="radio"] {
     text-decoration: none;
 }
 
-a.visited {
-    background-color: pink;
-}    
-
 .navbar-brand{
     margin-left: 10%;
     font-size: 1.4em;
 }
 
-.navbar, .card{
+.navbar, .footer, .title-card {
     background-color: rgba(240, 240, 240, 0.85);
+}
+
+a.visited {
+    border: 1px solid gray;
+    background-color: rgba(231, 254, 255, 0.85);
+}
+
+#main-container {
+    max-width: 60rem;
 }
