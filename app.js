@@ -24,6 +24,9 @@ app.get("/add", function(req, res){
 app.get("/edit", function(req, res){
     res.render("edit");
 }); //"/edit"
+app.get("/reddit", function(req, res){
+    res.render("reddit");
+});//"/"
 
 //Post route to receive form data from route "/add".
 app.post("/add", function(req, res){
@@ -102,6 +105,7 @@ app.get("/api/getPosts", function(req, res){
 app.listen(process.env.PORT, process.env.IP, function(){
     console.log("Express server is running..."); 
 });
+
 
 //---functions---
 //Add tags to database based upon postId.

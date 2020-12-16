@@ -1,0 +1,60 @@
+<%- include('partials/header.ejs') %>
+    <nav class="navbar navbar-dark bg-primary mb-3">
+      <div class="container">
+        <h1 class="navbar-brand">Welcome to Newsdrop!</h1>
+      </div>
+    </nav>
+    <div id="search-container" class="container">
+      <div id="search" class="card card-body bg-light mb-2">
+        <h4>Search Reddit</h4>
+        
+          <form id="search-form" method="POST">
+          <div class="form-group">
+            <input type="text" id="search-input" class="form-control mb-3" placeholder="Search Term...">
+        </div>
+        <div class="form-check form-check-inline">
+            Sort By:
+          <input class="form-check-input ml-2" type="radio" name="sortby" value="hot" checked>
+          <label class="form-check-label">
+            Hot
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="sortby" value="relevance">
+          <label class="form-check-label">
+            Relevance
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="sortby" value="new">
+          <label class="form-check-label">
+            Latest
+          </label>
+        </div>
+        <h5 class="mt-2">Limit: </h5>
+        <div class="form-group">
+          <select name="limit" id="limit" class="form-control">
+            <option value="5">5</option>
+            <option value="10" selected>10</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-dark btn-block mt-4">Search</button>
+      </form>
+    </div>
+    <div id="results"></div>
+  </div>
+  <div class="card bg-light mt-5 footer">
+      <!--<div class="card-header"> Footer </div>-->
+      <div class="card-body">
+          CST336 Internet Programming. 2020&copy; Davis, Randolph, Robell, and Singh <br>
+          <hr>
+          Background Photo by <a href="https://www.pexels.com/@sam-willis-457311">Sam Willis</a> from Pexels
+      </div>
+  </div>
+  <script type="module" src="js/reddit-api.js"></script>
+  <script type="module" src="js/reddit-functions.js"></script>
+    </body>
+</html>
