@@ -28,6 +28,10 @@ app.get("/reddit", function(req, res){
     res.render("reddit");
 });//"/"
 
+app.get("/userPosts", function(req, res){
+    res.render("userPosts");
+});//"/userPosts"
+
 //Post route to receive form data from route "/add".
 app.post("/add", function(req, res){
     //Parse tag string to remove spaces and duplicates and get a tag array.
@@ -91,6 +95,20 @@ app.get("/api/getPosts", function(req, res){
                         break;
         case "url":     sql = sql + " WHERE url=?";
                         sqlParams.push(req.query.url);
+                        break;
+        case "search":  
+                        if(!req.query.searchterm) {
+                            searchTerm = "";
+                        } else {
+                            searchTerm = req.query.searchterm;
+                        }
+                        sql = sql + " WHERE LOWER(title) LIKE '%"+searchTerm+"%'";
+                        if(req.query.sort == "title") {
+                            sql = sql + " ORDER BY title ASC LIMIT 20";
+                        }
+                        if(req.query.sort == "datetime") {
+                            sql = sql + " ORDER BY datetime DESC LIMIT 20";
+                        }
                         break;
     }
     

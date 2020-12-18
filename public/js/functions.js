@@ -1,8 +1,18 @@
 /* global $ */
 $(document).ready(function() {
-
-    async function displayUserLinks() {
-        let response = await fetch(`/api/getPosts?action=all`);
+    async function displayUserLinks(searchterm, sort) {
+        var endpoint = `/api/getPosts?action=all`;
+        if(searchterm || sort) {
+            endpoint = `/api/getPosts?action=search`;
+        }
+        if(searchterm) {
+            endpoint += '&searchterm='+searchterm;
+        }
+        if(sort) {
+            endpoint += '&sort='+sort;
+        }
+        let response = await fetch(endpoint);
+       
         let data = await response.json();
         // console.log(response); //testing
         // console.log(data); //testing
@@ -52,4 +62,10 @@ $(document).ready(function() {
        }
       
     });
+    
+    $('#search').on('submit', function(e){
+        e.preventDefault();
+        displayUserLinks($('#search-input').val(), $("input[name='sortby']:checked").val());
+        
+    })
 });
