@@ -59,9 +59,17 @@ function truncateString(myString, limit) {
 
 // Search reddit and update results.
 function searchReddit(searchTerm, searchLimit, sortBy){
+  // Check if on home feed
+  var isHomeFeed = false;
+  if(document.getElementById("home-feed")) {
+    isHomeFeed = true;
+  }
   // Search Reddit
   reddit.search(searchTerm, searchLimit, sortBy).then(results => {
     let output = '<div class="card-columns">';
+    if(isHomeFeed) {
+      output = '';
+    }
     // console.log(results); // testing
     results.forEach(post => {
       // Check for image
@@ -69,7 +77,7 @@ function searchReddit(searchTerm, searchLimit, sortBy){
         ? post.preview.images[0].source.url
         : 'https://cdn.comparitech.com/wp-content/uploads/2017/08/reddit-1.jpg';
       output += `
-      <div class="card mb-2">
+      <div class="card mb-3">
       <img class="card-img-top" src="${image}" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">${post.title}</h5>
@@ -83,7 +91,15 @@ function searchReddit(searchTerm, searchLimit, sortBy){
     </div>
       `;
     });
-    output += '</div>';
-    document.getElementById('results').innerHTML = output;
+    
+    if(!isHomeFeed) {
+      output += '</div>';
+    }
+    
+    if(isHomeFeed) {
+      document.getElementById('results').innerHTML += output;
+    } else {
+      document.getElementById('results').innerHTML = output;
+    }
   });
 }
