@@ -17,17 +17,21 @@ searchForm.addEventListener('submit', e => {
   const searchTerm = searchInput.value;
   // Check for input
   if (searchTerm == '') {
-    // Show message
+    // Show alert if there is no search term.
     showMessage('Please add a search term', 'alert-danger');
+  } else {
+    // Otherwise search Reddit.
+    searchReddit(searchTerm, searchLimit, sortBy);
   }
   // Clear field
   searchInput.value = '';
-
-  searchReddit(searchTerm, searchLimit, sortBy);
 });
 
 // Show Message Function
 function showMessage(message, className) {
+  // Return if alert is already displayed.
+  if(document.querySelector('.alert')) return;
+  
   // Create div
   const div = document.createElement('div');
   // Add classes
@@ -35,12 +39,13 @@ function showMessage(message, className) {
   // Add text
   div.appendChild(document.createTextNode(message));
   // Get parent
-  const searchContainer = document.getElementById('search-container');
+  const mainContainer = document.getElementById('main-container');
   // Get form
-  const search = document.getElementById('search');
-
+  // const search = document.getElementById('search');
+  const search = document.getElementById('results');
+  
   // Insert alert
-  searchContainer.insertBefore(div, search);
+  mainContainer.insertBefore(div, search);
 
   // Timeout after 3 sec
   setTimeout(function() {
