@@ -1,5 +1,4 @@
 const express = require("express");
-const fetch = require("node-fetch");
 const pool = require("./dbPool.js");
 const url = require('url');
 
@@ -89,6 +88,7 @@ app.post("/edit", function(req, res){
 app.get("/api/getPosts", function(req, res){
     let sql = "SELECT * FROM posts";
     let sqlParams = [];
+    let searchTerm;
     
     switch(req.query.action){
         case "all":     sql = sql + " ORDER BY datetime DESC LIMIT 20";
