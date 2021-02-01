@@ -39,11 +39,11 @@ app.post("/add", function(req, res){
         tags = req.body.tags.split(" ").filter(Boolean); //Use filter() to remove empty strings "" resulting from split() method.
         tags = [...new Set(tags)]; //Use the conversion to a set to remove duplicates.
     }
-    
+
     //Create sql string and param array.
     let sql = "INSERT INTO posts (title, type, url, description) VALUES (?,?,?,?)";
     let sqlParams = [req.body.title, req.body.type, req.body.url, req.body.description];
-    
+
     //Query database to insert post.
     pool.query(sql, sqlParams, function (err, rows){
         if(err) { //If there is a sql error, handle it immediately.
@@ -60,11 +60,11 @@ app.post("/add", function(req, res){
             }
             //function call to get baseUrl and add to baseUrls table
             addBase(req.body.url);
-            
+
             res.render("add-success", {"title": req.body.title, "type": req.body.type, "url": req.body.url, "description": req.body.description, "tags": tags});
         }
     });
-        
+
 }); //"/add"
 
 //Post route to receive form data from route "/edit".
@@ -72,7 +72,7 @@ app.post("/edit", function(req, res){
     //Create sql string and param array.
     let sql = "UPDATE posts SET title = ?, description = ? WHERE url = ?";
     let sqlParams = [req.body.title, req.body.description, req.body.url];
-    
+
     //Query database to insert post.
     pool.query(sql, sqlParams, function (err, rows){
         if(err) { //If there is a sql error, handle it immediately.
@@ -81,7 +81,7 @@ app.post("/edit", function(req, res){
             res.render("edit-success", {"title": req.body.title, "url": req.body.url, "description": req.body.description});
         }
     });
-    
+
 }); //"/edit"
 
 //local api to pull from user posts database
@@ -89,14 +89,14 @@ app.get("/api/getPosts", function(req, res){
     let sql = "SELECT * FROM posts";
     let sqlParams = [];
     let searchTerm;
-    
+
     switch(req.query.action){
         case "all":     sql = sql + " ORDER BY datetime DESC LIMIT 20";
                         break;
         case "url":     sql = sql + " WHERE url=?";
                         sqlParams.push(req.query.url);
                         break;
-        case "search":  
+        case "search":
                         if(!req.query.searchterm) {
                             searchTerm = "";
                         } else {
@@ -111,7 +111,7 @@ app.get("/api/getPosts", function(req, res){
                         }
                         break;
     }
-    
+
     pool.query(sql, sqlParams, function (err, rows, fields) {
         if (err) throw err;
         // console.log(rows); //testing
@@ -120,8 +120,8 @@ app.get("/api/getPosts", function(req, res){
 });
 
 //starting server
-app.listen(process.env.PORT, process.env.IP, function(){
-    console.log("Express server is running..."); 
+app.listen(process.env.PORT || 3000, process.env.IP, function(){
+    console.log("Express server is running...");
 });
 
 
@@ -131,15 +131,15 @@ function addTags(postId, tags){
     //First, create sql string and param array.
     let sql = "INSERT INTO tags (post_ID, tag) VALUES";
     let sqlParams = [];
-    
+
     for(let i = 0; i < tags.length; i++){
         sql = sql.concat(" (?,?)");
         if(i + 1 < tags.length) sql = sql.concat(",");
         sqlParams.push(postId, tags[i]);
     }
-    
+
     sql = sql.concat(";");
-    
+
     //Second, make sql query to insert tags.
     //Tags are of low importance so errors will just be logged.
     pool.query(sql, sqlParams, function (err){ if(err) console.log(err); });
@@ -155,9 +155,9 @@ function addBase(initialUrl){
     //load the baseUrl into a parameter array
     let sqlParams = [];
     sqlParams.push(baseUrl);
-    
+
     let sql = "INSERT INTO baseUrls (url, count) VALUES (?, 1) ON DUPLICATE KEY UPDATE count = count + 1";
 
-    pool.query(sql, sqlParams, function (err){ if(err) console.log(err); 
+    pool.query(sql, sqlParams, function (err){ if(err) console.log(err);
     });
 }
